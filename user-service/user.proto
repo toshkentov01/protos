@@ -1,0 +1,96 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "genproto/user-service";
+
+service UserService {
+    // rpcs for registering a user
+    rpc CreateUnIdentifiedUser(CreateUnIdentifiedUserRequest) returns (CreateUnIdentifiedUserResponse) {}
+    rpc CreateIdentifiedUser(CreateIdentifiedUserRequest) returns (CreateIdentifiedUserResponse) {}
+    rpc CheckFields(CheckfieldsRequest) returns (CheckfieldsResponse) {}
+    rpc CheckUserType(CheckUserTypeRequest) returns (CheckUserTypeResponse) {}
+
+    // cash controller rpcs
+    rpc Income(IncomeRequest) returns (Empty) {}
+    rpc Expense(ExpenseRequest) returns (Empty) {}
+    rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse) {}
+    rpc ListTotalOperationsByType(ListTotalOperationsByTypeRequest) returns (ListTotalOperationsByTypeResponse) {}
+}
+
+message Empty {}
+
+message CreateUnIdentifiedUserRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message CreateUnIdentifiedUserResponse {
+    string id = 1;
+}
+
+message CreateIdentifiedUserRequest {
+    string username = 1;
+    string full_name = 2;
+    string email = 3;
+    string password = 4;
+    string access_token = 5;
+    string refresh_token = 6;
+}
+
+message CreateIdentifiedUserResponse {
+    string id = 1;
+}
+
+message CheckfieldsRequest {
+    string username = 1;
+    string email = 2;
+}
+
+message CheckfieldsResponse {
+    bool username_exists = 1;
+    bool email_exists = 2;
+}
+
+message IncomeRequest {
+    string user_id = 1;
+    int64 income_amount = 2;
+}
+
+message ExpenseRequest {
+    string user_id = 1;
+    int64 expense_amount = 2;
+}
+
+message GetBalanceRequest {
+    string user_id = 1;
+}
+
+message GetBalanceResponse {
+    int64 balance = 1;
+}
+
+message ListTotalOperationsByTypeRequest {
+    string operation_type = 1;
+    string user_id = 2;
+}
+
+message Operations {
+    string action = 1;
+    string date = 2;
+}
+
+message ListTotalOperationsByTypeResponse {
+    repeated Operations results = 1;
+    int32 count = 2;
+}
+
+message CheckUserTypeRequest {
+    string user_id = 1;
+}
+
+message CheckUserTypeResponse {
+    bool identified = 1;
+}
+
+
