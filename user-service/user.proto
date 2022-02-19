@@ -25,6 +25,8 @@ message CreateUnIdentifiedUserRequest {
     string id = 1;
     string username = 2;
     string password = 3;
+    string access_token = 4;
+    string refresh_token = 5;
 }
 
 message CreateUnIdentifiedUserResponse {
