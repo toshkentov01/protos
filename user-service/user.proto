@@ -6,8 +6,8 @@ option go_package = "genproto/user-service";
 
 service UserService {
     // rpcs for registering a user
-    rpc CreateUnIdentifiedUser(CreateUnIdentifiedUserRequest) returns (CreateUnIdentifiedUserResponse) {}
-    rpc CreateIdentifiedUser(CreateIdentifiedUserRequest) returns (CreateIdentifiedUserResponse) {}
+    rpc CreateUnIdentifiedUser(CreateUnIdentifiedUserRequest) returns (Empty) {}
+    rpc CreateIdentifiedUser(CreateIdentifiedUserRequest) returns (Empty) {}
     rpc CheckFields(CheckfieldsRequest) returns (CheckfieldsResponse) {}
     rpc CheckUserType(CheckUserTypeRequest) returns (CheckUserTypeResponse) {}
 
@@ -21,8 +21,9 @@ service UserService {
 message Empty {}
 
 message CreateUnIdentifiedUserRequest {
-    string username = 1;
-    string password = 2;
+    string id = 1;
+    string username = 2;
+    string password = 3;
 }
 
 message CreateUnIdentifiedUserResponse {
@@ -36,6 +37,7 @@ message CreateIdentifiedUserRequest {
     string password = 4;
     string access_token = 5;
     string refresh_token = 6;
+    string id = 7;
 }
 
 message CreateIdentifiedUserResponse {
