@@ -10,6 +10,7 @@ service UserService {
     rpc CreateIdentifiedUser(CreateIdentifiedUserRequest) returns (Empty) {}
     rpc CheckFields(CheckfieldsRequest) returns (CheckfieldsResponse) {}
     rpc CheckUserType(CheckUserTypeRequest) returns (CheckUserTypeResponse) {}
+    rpc CheckUserAccount(CheckUserAccountRequest) returns (CheckUserAccountResponse) {} 
 
     // cash controller rpcs
     rpc Income(IncomeRequest) returns (Empty) {}
@@ -95,4 +96,12 @@ message CheckUserTypeResponse {
     bool identified = 1;
 }
 
+message CheckUserAccountRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message CheckUserAccountResponse {
+    bool exists = 1;
+}
 
